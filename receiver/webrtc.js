@@ -299,11 +299,13 @@ var flint = window.flint || {};
       }
 
       function _setRemoteOfferSuccess() {
+        /*
         var remoteStreams = pc.getRemoteStreams();
         if (remoteStreams.length > 0 && remoteStreams[0].getVideoTracks().length > 0) {
           self.log("Waiting for remote video.");
           waitForRemoteVideo();
         }
+        */
         self.log("Successfully applied offer...create answer!");
         var mediaConstraints = {
           'mandatory': {
@@ -327,13 +329,22 @@ var flint = window.flint || {};
 
       function _onIceCandidate(evt) {
         self.log("New ICE candidate:" + evt);
-        self.log("New ICE candidate:" + JSON.stringify(evt.candidate));
+        self.log("!New ICE candidate:" + JSON.stringify(evt.candidate));
 
         if (evt.candidate) {
+            var spdMid;
+          if (evt.candidate.sdpMid.length == 0) {
+            if (evt.candidate.sdpMLineIndex == 0) {
+                spdMid = 'audio';
+            } else {
+                spdMid = 'video';
+            }
+          }
           window.messageBus.send(JSON.stringify({
 		type: "candidate",
 		sdpMLineIndex: evt.candidate.sdpMLineIndex,
-		sdpMid: evt.candidate.sdpMid,
+		//sdpMid: evt.candidate.sdpMid,
+		/sdpMid: spdMid;
 		candidate: evt.candidate.candidate
 		}) , senderId);
         }  
