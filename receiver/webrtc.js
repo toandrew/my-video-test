@@ -327,6 +327,7 @@ var flint = window.flint || {};
 
       function _onIceCandidate(evt) {
         self.log("New ICE candidate:" + evt);
+        self.log("New ICE candidate:" + JSON.stringify(evt.candidate));
 
         if (evt.candidate) {
           window.messageBus.send(JSON.stringify({
