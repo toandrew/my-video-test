@@ -344,7 +344,7 @@ var flint = window.flint || {};
 		type: "candidate",
 		sdpMLineIndex: evt.candidate.sdpMLineIndex,
 		//sdpMid: evt.candidate.sdpMid,
-		/sdpMid: spdMid;
+		sdpMid: spdMid,
 		candidate: evt.candidate.candidate
 		}) , senderId);
         }  
