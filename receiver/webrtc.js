@@ -210,7 +210,8 @@ var flint = window.flint || {};
 
       function _createPeerConnection(senderId) {
         //var config = {"iceServers":[]};
-        var config = {"iceServers":[{"url":"stun:stun.services.mozilla.com"}, {"url": "stun:stun.l.google.com:19302"}]};
+        //var config = {"iceServers":[{"url":"stun:stun.services.mozilla.com"}, {"url": "stun:stun.l.google.com:19302"}]};
+        var config = {"iceServers":[{"url":"stun:stun.services.mozilla.com"}]};
 
         var pc = new window.RTCPeerConnection(config, {});
 
