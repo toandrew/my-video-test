@@ -77,7 +77,7 @@ var flint = window.flint || {};
       // delete related data
       var pc = this.getPeerConnection(senderId);
       if (pc !== 'undefined') {
-        //pc.close();
+        pc.close();
         delete self.peers[senderId];
         delete self.videos[senderId];
         delete self.streams[senderId];
@@ -89,7 +89,7 @@ var flint = window.flint || {};
       this.log('onSenderDisconnected. Total number of senders: ' + Object.keys(window.flintReceiverManager.getSenderList()).length);
 
       // display large video
-      if (Object.keys(window.flintReceiverManager.getSenderList()).length == 2) {
+      if (Object.keys(window.flintReceiverManager.getSenderList()).length == 1) {
           var sender = Object.keys(window.flintReceiverManager.getSenderList())[0];
           if (senderId == sender) {
             this.log("disconnected??");
@@ -144,8 +144,7 @@ var flint = window.flint || {};
         } else if (data.type === "bye") {
           this.broadcastBye(senderId);
         } else if (data.type === "hello") {
-          //this.processHello(senderId, data);
-         this.processOffer(senderId, data);
+          this.processHello(senderId, data);
         } else {
           this.log("unknown command!!!" + data.type);
         }
@@ -358,30 +357,8 @@ var flint = window.flint || {};
       }
 
       var pc = _createPeerConnection(senderId);
-      //pc.setRemoteDescription(new window.SessionDescription(sdp),
-      //                           _setRemoteOfferSuccess.bind(this), self.failure);
-
-
-      function _setLocalAndSendMessage(sessionDescription) {
-        //sessionDescription.sdp = setBandwidth(sessionDescription.sdp);
-        pc.setLocalDescription(sessionDescription);
-        self.log("createOffer, Sending SDP:" + sessionDescription);
-        self.sendMessage(sessionDescription);
-      }
-
-      function _createOfferFailed() {
-        self.log("Create Answer failed");
-      }
-
-      var mediaConstraints = {
-          'mandatory': {
-            'OfferToReceiveAudio': true,
-            'OfferToReceiveVideo': true
-          }
-      };
-
-      pc.createOffer(_setLocalAndSendMessage.bind(this), _createOfferFailed, mediaConstraints);
-
+      pc.setRemoteDescription(new window.SessionDescription(sdp),
+                                 _setRemoteOfferSuccess.bind(this), self.failure);
     },
 
     processIceCandidate: function(senderId, msg) {
