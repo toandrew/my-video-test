@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Test Video</title>
+    <link rel="stylesheet" href="main.css"/>
+  </head>
+  <body>
+  <div id="videos">
+    <video id="mini-video" autoplay muted ></video>
+    <canvas id="remote-canvas" hidden></canvas>
+    <video id="large-video" autoplay></video>
+  </div>
+  <footer class="hidden">
+    <div id="sharing" class="active">
+      <div id="room-link">Waiting for someone to join <a target="_blank" href=""></a></div>
+    </div>
+    <div id="info" class="warning active"><pre style="line-height: initial" id="stats">Channel ok.
+Channel ok.
+</pre></div>
+    <div id="status" class=""></div>
+  </footer>
+  <script>
+    var divs = {
+      large_video : document.getElementById("large-video") ,
+      mini_video : document.getElementById("mini-video") ,
+    };
+
+    window.onload = function() {
+        divs.large_video.src = "http://fling.infthink.com/droidream/samples/Godzilla.mp4";
+        divs.large_video.play();
+    }
+
+    </script>
+  </body>
+</html>
