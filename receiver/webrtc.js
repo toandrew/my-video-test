@@ -338,6 +338,8 @@ var flint = window.flint || {};
                 spdMid = 'audio';
             } else {
                 spdMid = 'video';
+            } else {
+                spdMid = evt.candidate.sdpMid;
             }
           }
           window.messageBus.send(JSON.stringify({
