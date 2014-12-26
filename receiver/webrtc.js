@@ -143,10 +143,16 @@ var flint = window.flint || {};
           this.switchView(senderId, data);
         } else if (data.type === "bye") {
           this.broadcastBye(senderId);
+        } else if (data.type === "hello") {
+          this.processHello(senderId, data);
         } else {
           this.log("unknown command!!!" + data.type);
         }
       }
+    },
+
+    processHello: function(senderId, sdp) {
+      window.messageBus.send("{'type':'hello', 'data': 'hello!'}");
     },
 
     processAnswer: function(senderId, sdp) {
