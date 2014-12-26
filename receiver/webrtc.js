@@ -336,7 +336,7 @@ var flint = window.flint || {};
           if (evt.candidate.sdpMid.length == 0) {
             if (evt.candidate.sdpMLineIndex == 0) {
                 spdMid = 'audio';
-            } else {
+            } else if (evt.candidate.sdpMLineIndex == 1) {
                 spdMid = 'video';
             } else {
                 spdMid = evt.candidate.sdpMid;
