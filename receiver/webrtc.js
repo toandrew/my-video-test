@@ -209,8 +209,8 @@ var flint = window.flint || {};
       this.log("Applying offer");
 
       function _createPeerConnection(senderId) {
-        var config = {"iceServers":[]};
-        //var config = {"iceServers":[{"url":"stun:stun.services.mozilla.com"}, {"url": "stun:stun.l.google.com:19302"}]};
+        //var config = {"iceServers":[]};
+        var config = {"iceServers":[{"url":"stun:stun.services.mozilla.com"}, {"url": "stun:stun.l.google.com:19302"}]};
 
         var pc = new window.RTCPeerConnection(config, {});
 
@@ -332,6 +332,7 @@ var flint = window.flint || {};
         self.log("!New ICE candidate:" + JSON.stringify(evt.candidate));
 
         if (evt.candidate) {
+            /*
             var spdMid;
           if (evt.candidate.sdpMid.length == 0) {
             if (evt.candidate.sdpMLineIndex == 0) {
@@ -342,11 +343,12 @@ var flint = window.flint || {};
                 spdMid = evt.candidate.sdpMid;
             }
           }
+          */
           window.messageBus.send(JSON.stringify({
 		type: "candidate",
 		sdpMLineIndex: evt.candidate.sdpMLineIndex,
-		//sdpMid: evt.candidate.sdpMid,
-		sdpMid: spdMid,
+		sdpMid: evt.candidate.sdpMid,
+		//sdpMid: spdMid,
 		candidate: evt.candidate.candidate
 		}) , senderId);
         }  
