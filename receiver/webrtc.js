@@ -311,7 +311,7 @@ var flint = window.flint || {};
         self.log("Successfully applied offer...create answer!");
         var mediaConstraints = {
           'mandatory': {
-        	'OfferToReceiveAudio': true,
+        	'OfferToReceiveAudio': false,
                 'OfferToReceiveVideo': true
           },
         };
