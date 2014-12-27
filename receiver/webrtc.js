@@ -166,13 +166,17 @@ var flint = window.flint || {};
 
       // switch views. mini<->large
       if (senders.length == 2) {
-          var large = divs.large_video.src;
-          var mini = divs.mini_video.src;
-          divs.large_video.src = mini;
-          divs.mini_video.src = large;
-         
+          console.log("switch!!!!!")
           var one = senders[0];
           var other = senders[1];
+          if (self.videos[one] == 'large') {
+            self.attachMediaStream(divs.large_video, self.streams[other]);
+            self.attachMediaStream(divs.mini_video, self.streams[one]);
+          } else {
+            self.attachMediaStream(divs.large_video, self.streams[one]);
+            self.attachMediaStream(divs.mini_video, self.streams[other]);
+          }
+         
           var source = self.videos[one];
           self.videos[one] = self.videos[other];
           self.videos[other] = source;
